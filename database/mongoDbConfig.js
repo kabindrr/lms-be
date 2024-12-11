@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const uri = process.env.MONGO_DB;
+const uri = process.env.MONGO_URL;
 
 export const MongoDb = () => {
   try {
