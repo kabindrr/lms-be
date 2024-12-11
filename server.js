@@ -1,7 +1,26 @@
-import express from "express";
+import express, { json } from "express";
+import cors from "cors";
+import { MongoDb } from "./database/mongoDbConfig.js";
+import morgan from "morgan";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+//Database
+MongoDb();
+
+//middlewares
+app.use(cors());
+app.use(morgan("dev"));
+app.use(express.json());
+
+//server status
+app.get("/", (req, res) => {
+  res.json({
+    status: "Success",
+    message: "Server is Live",
+  });
+});
 
 app.listen(PORT, (error) => {
   error
