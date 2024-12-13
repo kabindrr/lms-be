@@ -3,6 +3,8 @@
 ###
 GET {{rootURL}}
 
+###
+POST {{rootURL}}/auth/register
 
 ###
 POST {{rootURL}}/user
