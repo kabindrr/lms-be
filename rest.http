@@ -20,6 +20,19 @@ Content-Type: application/json
 }
 
 ###
+POST {{rootURL}}/user
+Content-Type: application/json
+
+{
+    "fName":"a",
+    "lName":"b",
+    "phone":"1234567",
+    "email":"z@gmail.com",
+    "password":"as"
+
+}
+
+###
 POST {{rootURL}}/user/login
 Content-Type: application/json
 
