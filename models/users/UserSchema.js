@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema(
     },
     fName: {
       type: String,
+
       required: true,
     },
     lName: {

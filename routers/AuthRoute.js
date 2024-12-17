@@ -1,16 +1,7 @@
 import express from "express";
+import { insertUser } from "../controllers/AuthController.js";
 
 export const AuthRoute = express.Router();
 
 //user signup
-AuthRoute.post("/register", (req, res, next) => {
-  try {
-    //signup
-    res.json({
-      status: "success",
-      message: "Registration success",
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+AuthRoute.post("/register", insertUser);

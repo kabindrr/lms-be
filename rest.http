@@ -7,14 +7,14 @@ GET {{rootURL}}
 POST {{rootURL}}/auth/register
 
 ###
-POST {{rootURL}}/user
+POST {{rootURL}}/auth/register
 Content-Type: application/json
 
 {
     "fName":"a",
     "lName":"b",
     "phone":"1234567",
-    "email":"z@gmail.com",
+    "email":"e@gmail.com",
     "password":"as"
 
 }
