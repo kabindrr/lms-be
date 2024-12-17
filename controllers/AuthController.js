@@ -1,13 +1,31 @@
 import { ResponseClient } from "../middlewares/ResponseClient.js";
+import { createNewSession } from "../models/session/SessionModal.js";
 import { addUser } from "../models/users/UserModal.js";
 import { hashPassword } from "../utils/bcryptjs.js";
-
+import { v4 as uuidv4 } from "uuid";
 export const insertUser = async (req, res, next) => {
   try {
     req.body.password = hashPassword(req.body.password);
 
     const user = await addUser(req.body);
     if (user?._id) {
+      //create an unique user activation link and send to their email
+
+      const session = await createNewSession({
+        token: uuidv4(),
+        associaton: user.email,
+      });
+
+      if (session?._id) {
+        const url =
+          "http://localhost/3000?sessionId=" +
+          session._id +
+          "&t=" +
+          session.token;
+        //send this url to the email
+        console.log(url);
+      }
+
       const message =
         "We have sent you an email with activation link, Please check your email and follow the instruction to activate your account";
       return ResponseClient({ req, res, message });
