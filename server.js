@@ -5,6 +5,8 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import { UserRouter } from "./routers/UserRouter.js";
 import { AuthRoute } from "./routers/AuthRoute.js";
+import { errorHandler } from "./middlewares/ErrorHandler.js";
+import { ResponseClient } from "./middlewares/ResponseClient.js";
 dotenv.config();
 
 const app = express();
@@ -23,11 +25,11 @@ app.use("/api/v1/auth", AuthRoute);
 
 //server status
 app.get("/", (req, res) => {
-  res.json({
-    status: "Success",
-    message: "Server is Live",
-  });
+  const message = "Server is Live";
+  ResponseClient({req, res, message});
 });
+
+app.use(errorHandler);
 
 MongoDbConfig()
   .then((error) => {

@@ -1,4 +1,4 @@
-@rootURL = http://localhost:3000/api/v1
+@rootURL = http://localhost:3000
 
 ###
 GET {{rootURL}}
@@ -7,14 +7,14 @@ GET {{rootURL}}
 POST {{rootURL}}/auth/register
 
 ###
-POST {{rootURL}}/auth/register
+POST {{rootURL}}/api/v1/auth/register
 Content-Type: application/json
 
 {
     "fName":"a",
     "lName":"b",
     "phone":"1234567",
-    "email":"e@gmail.com",
+    "email":"f@gmail.com",
     "password":"as"
 
 }
