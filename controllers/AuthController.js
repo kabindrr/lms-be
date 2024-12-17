@@ -1,6 +1,7 @@
 import { ResponseClient } from "../middlewares/ResponseClient.js";
 import { createNewSession } from "../models/session/SessionModal.js";
 import { addUser } from "../models/users/UserModal.js";
+import { UserActivationUrlEmail } from "../services/email/EmailServices.js";
 import { hashPassword } from "../utils/bcryptjs.js";
 import { v4 as uuidv4 } from "uuid";
 export const insertUser = async (req, res, next) => {
@@ -17,18 +18,20 @@ export const insertUser = async (req, res, next) => {
       });
 
       if (session?._id) {
-        const url =
-          "http://localhost/3000?sessionId=" +
-          session._id +
-          "&t=" +
-          session.token;
+        const url = `${process.env.ROOT_URL}/activate-user?sessionId=${session._id}&t=${session.token}`;
         //send this url to the email
         console.log(url);
+        const emailId = await UserActivationUrlEmail({
+          email: user.email,
+          url,
+          name: user.fName,
+        });
+        if (emailId) {
+          const message =
+            "We have sent you an email with activation link, Please check your email and follow the instruction to activate your account";
+          return ResponseClient({ req, res, message });
+        }
       }
-
-      const message =
-        "We have sent you an email with activation link, Please check your email and follow the instruction to activate your account";
-      return ResponseClient({ req, res, message });
     }
 
     throw new Error("Unable to create an account,try again later");
