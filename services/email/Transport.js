@@ -10,8 +10,6 @@ export const EmailTransporter = () => {
       user: process.env.SMTP_EMAIL,
       pass: process.env.SMTP_PASS,
     },
-    logger: true,
-    debug: true,
   });
 
   return transporter;

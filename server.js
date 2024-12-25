@@ -26,7 +26,7 @@ app.use("/api/v1/auth", AuthRoute);
 //server status
 app.get("/", (req, res) => {
   const message = "Server is Live";
-  ResponseClient({req, res, message});
+  ResponseClient({ req, res, message });
 });
 
 app.use(errorHandler);
