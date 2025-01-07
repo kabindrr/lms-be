@@ -1,7 +1,13 @@
 import { ResponseClient } from "../middlewares/ResponseClient.js";
-import { createNewSession } from "../models/session/SessionModal.js";
-import { addUser } from "../models/users/UserModal.js";
-import { UserActivationUrlEmail } from "../services/email/EmailServices.js";
+import {
+  createNewSession,
+  deleteSession,
+} from "../models/session/SessionModal.js";
+import { addUser, updateUser } from "../models/users/UserModal.js";
+import {
+  UserActivatedNotificationEmail,
+  UserActivationUrlEmail,
+} from "../services/email/EmailServices.js";
 import { hashPassword } from "../utils/bcryptjs.js";
 import { v4 as uuidv4 } from "uuid";
 export const insertUser = async (req, res, next) => {
@@ -41,6 +47,37 @@ export const insertUser = async (req, res, next) => {
         "This email already exist for another user, use different email and try again later";
       error.statusCode = 400;
     }
+    next(error);
+  }
+};
+
+export const activateUser = async (req, res, next) => {
+  try {
+    const { sessionId, t } = req.body;
+    console.log(sessionId, t);
+
+    const session = await deleteSession({ _id: sessionId, token: t });
+    if (session?._id) {
+      //update user to active
+      const user = await updateUser(
+        { email: session.associaton },
+        { isVerified: "true" }
+      );
+
+      if (user?._id) {
+        //respond back to frontend
+
+        //send email notification
+        UserActivatedNotificationEmail({ email: user.email, name: user.fName });
+
+        const message = "Your account has been activated, you may login now ";
+        return ResponseClient({ req, res, message });
+      }
+    }
+    const message = "Invalid link or token expired";
+    const statusCode = 400;
+    ResponseClient({ req, res, message, statusCode });
+  } catch (error) {
     next(error);
   }
 };

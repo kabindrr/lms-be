@@ -11,13 +11,24 @@ POST {{rootURL}}/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "fName":"a",
-    "lName":"b",
-    "phone":"1234567",
-    "email":"zzzazxyzz@gmail.com",
-    "password":"as"
-
+    "fName":"Kabindra",
+    "lName":"Ranabhat",
+    "phone":"1234567890",
+    "email":"n@gmail.com",
+    "password":"aA2@aa"
+ 
 }
+
+### post to activate user
+POST {{rootURL}}/api/v1/auth/activate-user
+Content-Type: application/json
+
+{
+   "sessionId":"677cc6c42b1618dc8dd37d47",
+   "t":"e8ca1fb4-8f8e-4cca-b054-2d3c613c2bd9"
+    
+}
+
 
 ###
 POST {{rootURL}}/user
