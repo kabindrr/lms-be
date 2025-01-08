@@ -1,9 +1,12 @@
 import express from "express";
 import { activateUser, insertUser } from "../controllers/AuthController.js";
-import { validateData } from "../middlewares/validation/JoiValidation.js";
+import {
+  newUserValidation,
+  userActivationValidation,
+} from "../middlewares/validation/AuthValidation.js";
 
 export const AuthRoute = express.Router();
 
 //user signup
-AuthRoute.post("/register", validateData, insertUser);
-AuthRoute.post("/activate-user", activateUser);
+AuthRoute.post("/register", newUserValidation, insertUser);
+AuthRoute.post("/activate-user", userActivationValidation, activateUser);
