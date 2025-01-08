@@ -14,9 +14,9 @@ export const validateData = (req, res, next) => {
 
   //pass your data, req.body to the schema
 
-  const value = schema.validate(req.body);
+  const { value, error } = schema.validate(req.body);
 
-  if (value.error) {
+  if (error) {
     return ResponseClient({
       req,
       res,
@@ -24,7 +24,6 @@ export const validateData = (req, res, next) => {
       statusCode: 400,
     });
   }
-  next();
-
   //if pass go next() or response error from here
+  next();
 };
