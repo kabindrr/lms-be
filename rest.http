@@ -11,10 +11,10 @@ POST {{rootURL}}/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "fName":"Kabindra",
+    "fName":"kabi",
     "lName":"Ranabhat",
     "phone":"1234567890",
-    "email":"n@gmail.com",
+    "email":"kl@gmail.com",
     "password":"aA2@aa"
  
 }
