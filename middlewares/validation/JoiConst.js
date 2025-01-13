@@ -15,4 +15,4 @@ export const PHONE_REQ = Joi.number().required();
 export const SESSION = Joi.string().min(10).max(30);
 export const SESSION_REQ = Joi.string().min(10).max(30).required();
 export const TOKEN = Joi.string().min(10).max(30);
-export const TOKEN_REQ = Joi.string().min(10).max(30).required();
+export const TOKEN_REQ = Joi.string().min(10).max(50).required();

@@ -30,28 +30,11 @@ Content-Type: application/json
 }
 
 
-###
-POST {{rootURL}}/user
+### login user
+POST {{rootURL}}/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "fName":"a",
-    "lName":"b",
-    "phone":"1234567",
-    "email":"z@gmail.com",
-    "password":"as"
-
+    "email":"a@gmail.com",
+    "password":"aA2@aa"
 }
-
-###
-POST {{rootURL}}/user/login
-Content-Type: application/json
-
-{
-    "email":"z@gmail.com",
-    "password":"as"
-}
-
-###
-GET {{rootURL}}/user
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzMzOTc0OTU1LCJleHAiOjE3MzQwNjEzNTV9.m0ahuhptg7s8ojVLyCjOa36quMwHWjvP_BoJ1Taotwc

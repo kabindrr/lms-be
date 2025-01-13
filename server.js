@@ -3,7 +3,7 @@ import cors from "cors";
 import { MongoDbConfig } from "./database/mongoDbConfig.js";
 import morgan from "morgan";
 import dotenv from "dotenv";
-import { UserRouter } from "./routers/UserRouter.js";
+
 import { AuthRoute } from "./routers/AuthRoute.js";
 import { errorHandler } from "./middlewares/ErrorHandler.js";
 import { ResponseClient } from "./middlewares/ResponseClient.js";

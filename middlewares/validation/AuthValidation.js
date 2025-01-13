@@ -28,3 +28,11 @@ export const userActivationValidation = (req, res, next) => {
   };
   validateData({ req, res, next, obj });
 };
+
+export const loginValidation = (req, res, next) => {
+  const obj = {
+    email: EMAIL_REQ,
+    password: PASSWORD_REQ,
+  };
+  validateData({ req, res, next, obj });
+};

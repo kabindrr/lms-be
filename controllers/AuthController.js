@@ -3,12 +3,16 @@ import {
   createNewSession,
   deleteSession,
 } from "../models/session/SessionModal.js";
-import { addUser, updateUser } from "../models/users/UserModal.js";
+import {
+  addUser,
+  getUserByEmail,
+  updateUser,
+} from "../models/users/UserModal.js";
 import {
   UserActivatedNotificationEmail,
   UserActivationUrlEmail,
 } from "../services/email/EmailServices.js";
-import { hashPassword } from "../utils/bcryptjs.js";
+import { comparepassword, hashPassword } from "../utils/bcryptjs.js";
 import { v4 as uuidv4 } from "uuid";
 export const insertUser = async (req, res, next) => {
   try {
@@ -82,4 +86,39 @@ export const activateUser = async (req, res, next) => {
   }
 };
 
-export const loginUser = async (req, res, next) => {};
+export const loginUser = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    console.log(email, password);
+
+    //get user by email
+
+    const user = await getUserByEmail(email);
+    //compare password
+    if (user?._id) {
+      const isPasswordCorrect = comparepassword(password, user.password);
+
+      if (isPasswordCorrect) {
+        console.log("User authenticated");
+
+        const jwts = {};
+
+        return ResponseClient({
+          req,
+          res,
+          message: "Login Successful",
+          payload: jwts,
+        });
+      }
+    }
+
+    //create tokens
+
+    //respons jwts
+
+    const message = "Invalid login details";
+    const statusCode = 401;
+  } catch (error) {
+    next(error);
+  }
+};
