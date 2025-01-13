@@ -14,6 +14,7 @@ import {
 } from "../services/email/EmailServices.js";
 import { comparepassword, hashPassword } from "../utils/bcryptjs.js";
 import { v4 as uuidv4 } from "uuid";
+import { getJWTs } from "../utils/JWT.js";
 export const insertUser = async (req, res, next) => {
   try {
     req.body.password = hashPassword(req.body.password);
@@ -101,7 +102,8 @@ export const loginUser = async (req, res, next) => {
       if (isPasswordCorrect) {
         console.log("User authenticated");
 
-        const jwts = {};
+        //create jwts
+        const jwts = await getJWTs(email);
 
         return ResponseClient({
           req,
@@ -111,8 +113,6 @@ export const loginUser = async (req, res, next) => {
         });
       }
     }
-
-    //create tokens
 
     //respons jwts
 
