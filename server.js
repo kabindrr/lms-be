@@ -21,7 +21,6 @@ app.use(express.json());
 
 //routes
 app.use("/api/v1/auth", AuthRoute);
-// app.use("/api/v1/user", UserRouter);
 
 //server status
 app.get("/", (req, res) => {

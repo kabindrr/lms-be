@@ -10,3 +10,4 @@ export const AuthRoute = express.Router();
 //user signup
 AuthRoute.post("/register", newUserValidation, insertUser);
 AuthRoute.post("/activate-user", userActivationValidation, activateUser);
+AuthRoute.post("/login");
