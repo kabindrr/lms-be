@@ -20,9 +20,11 @@ export const Sign_Access_JWT = async (email) => {
 
 export const Verify_Access_JWT = (token) => {
   try {
+    console.log(5000, token);
     return JWT.verify(token, process.env.JWT_Access_Secret);
   } catch (error) {
     console.log(error.message);
+    return error.message;
   }
 };
 
@@ -37,6 +39,15 @@ export const Create_Refresh_JWT = async (email) => {
   const user = await updateUser({ email }, { refreshJWT });
   console.log(5000, user);
   return user?._id ? refreshJWT : null;
+};
+
+export const Verify_Refresh_JWT = (token) => {
+  try {
+    return JWT.verify(token, process.env.JWT_Refresh_Secret);
+  } catch (error) {
+    console.log(error.message);
+    return error.message;
+  }
 };
 
 export const getJWTs = async (email) => {

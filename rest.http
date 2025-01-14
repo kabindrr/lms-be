@@ -38,3 +38,8 @@ Content-Type: application/json
     "email":"a@gmail.com",
     "password":"aA2@aa"
 }
+
+
+###Get user Profile
+GET {{rootURL}}/api/v1/users/profile
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM2ODM2NzYxLCJleHAiOjE3MzY5MjMxNjF9.ZFF6BXj4emwk2Nr6VwKb0edBahdODUg6cWu3NOU65vY
