@@ -95,9 +95,24 @@ export const loginUser = async (req, res, next) => {
     //get user by email
 
     const user = await getUserByEmail(email);
+
+    if (!user?._id) {
+      // User does not exist
+      const message = "Invalid login details";
+      const statusCode = 401;
+      return ResponseClient({ req, res, message, statusCode });
+    }
+
     //compare password
     if (user?._id) {
       const isPasswordCorrect = comparepassword(password, user.password);
+
+      if (!isPasswordCorrect) {
+        // Incorrect password
+        const message = "Invalid login details";
+        const statusCode = 401;
+        return ResponseClient({ req, res, message, statusCode });
+      }
 
       if (isPasswordCorrect) {
         console.log("User authenticated");
@@ -115,9 +130,6 @@ export const loginUser = async (req, res, next) => {
     }
 
     //respons jwts
-
-    const message = "Invalid login details";
-    const statusCode = 401;
   } catch (error) {
     next(error);
   }
