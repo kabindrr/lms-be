@@ -9,10 +9,12 @@ import {
   newUserValidation,
   userActivationValidation,
 } from "../middlewares/validation/AuthValidation.js";
+import { renewaccessJWTMiddleware } from "../middlewares/AuthMiddleWare.js";
 
 export const AuthRoute = express.Router();
 
 //user signup
 AuthRoute.post("/register", newUserValidation, insertUser);
 AuthRoute.post("/activate-user", userActivationValidation, activateUser);
-AuthRoute.post("/login",loginValidation, loginUser);
+AuthRoute.post("/login", loginValidation, loginUser);
+AuthRoute.get("/renew-access-JWT", renewaccessJWTMiddleware);

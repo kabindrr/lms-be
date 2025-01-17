@@ -1,6 +1,6 @@
 import { getSession } from "../models/session/SessionModal.js";
-import { getUserByEmail } from "../models/users/UserModal.js";
-import { Verify_Access_JWT } from "../utils/JWT.js";
+import { getOneUser, getUserByEmail } from "../models/users/UserModal.js";
+import { Sign_Access_JWT, Verify_Access_JWT, Verify_Refresh_JWT } from "../utils/JWT.js";
 import { ResponseClient } from "./ResponseClient.js";
 
 export const userAuthMiddleWare = async (req, res, next) => {
@@ -29,6 +29,41 @@ export const userAuthMiddleWare = async (req, res, next) => {
       }
     }
     message = decoded === "jwt expired" ? decoded : "Unauthorized";
+  }
+
+  ResponseClient({ req, res, message, statusCode: 401 });
+};
+
+export const renewaccessJWTMiddleware = async (req, res, next) => {
+  const { authorization } = req.headers;
+  let message = "Unauthorized";
+  //get accessJWT
+  if (authorization) {
+    const token = authorization.split(" ")[1];
+
+    //check if the token is valid
+    const decoded = Verify_Refresh_JWT(token);
+
+    if (decoded.email) {
+      //check user in userTable
+      const user = await getOneUser({
+        email: decoded.email,
+        refreshJWT: token,
+      });
+
+      if (user?._id) {
+        //create new accessJWT
+        const newToken = await Sign_Access_JWT(decoded.email);
+
+        //return accessJWT
+        return ResponseClient({
+          req,
+          res,
+          message: "here is the accessJWT",
+          payload: newToken,
+        });
+      }
+    }
   }
 
   ResponseClient({ req, res, message, statusCode: 401 });

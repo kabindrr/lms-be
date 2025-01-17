@@ -42,4 +42,10 @@ Content-Type: application/json
 
 ###Get user Profile
 GET {{rootURL}}/api/v1/users/profile
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM2ODQwNzY5LCJleHAiOjE3MzY5MjcxNjl9.CZGTvc_bSr7RYHmovQLK77sElVTJ__pB9AaFLn1EaBw
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM3MDg1MzAxLCJleHAiOjE3MzcxNzE3MDF9.M2WKIULRXKEYSmLE0x2KSR2sS2pkr_sBPepMhfePv8k
+
+
+
+###Renew accessJWT
+GET {{rootURL}}/api/v1/auth/renew-access-JWT
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM3MDg1MjE0LCJleHAiOjE3Mzk2NzcyMTR9.p_a6dpdJtgtYfYSSAK3h6bSsUF776g9HkQr_MhKBDjI
