@@ -12,3 +12,7 @@ export const deleteSession = (filter) => {
 export const getSession = (filter) => {
   return SessionSchema.findOne(filter);
 };
+
+export const deleteManySession = (filter) => {
+  return SessionSchema.deleteMany(filter);
+};

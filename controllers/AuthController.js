@@ -1,6 +1,7 @@
 import { ResponseClient } from "../middlewares/ResponseClient.js";
 import {
   createNewSession,
+  deleteManySession,
   deleteSession,
 } from "../models/session/SessionModal.js";
 import {
@@ -130,6 +131,21 @@ export const loginUser = async (req, res, next) => {
     }
 
     //respons jwts
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const logoutUser = async (req, res, next) => {
+  try {
+    //get the token,
+    //update refreshJWT to empty
+    const { email } = req.userInfo;
+    await updateUser({ email }, { refreshJWT: "" });
+    //remove the accessJWT from session table
+
+    await deleteManySession({ associaton: email });
+    ResponseClient({ req, res, message: "you are logged out" });
   } catch (error) {
     next(error);
   }
