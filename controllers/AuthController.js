@@ -16,6 +16,7 @@ import {
 import { comparepassword, hashPassword } from "../utils/bcryptjs.js";
 import { v4 as uuidv4 } from "uuid";
 import { getJWTs } from "../utils/JWT.js";
+import { generateRandomOTP } from "../utils/randomGenerator.js";
 export const insertUser = async (req, res, next) => {
   try {
     req.body.password = hashPassword(req.body.password);
@@ -146,6 +147,38 @@ export const logoutUser = async (req, res, next) => {
 
     await deleteManySession({ associaton: email });
     ResponseClient({ req, res, message: "you are logged out" });
+  } catch (error) {
+    next(error);
+  }
+};
+export const generateOTP = async (req, res, next) => {
+  try {
+    //get email from req.body
+
+    const { email } = req.body;
+
+    //get user by email
+
+    const user = await getUserByEmail(email);
+
+    if (user?._id) {
+      //Generate OTP
+      const otp = generateRandomOTP();
+      console.log(otp);
+      // store in session table
+      const session = await createNewSession({
+        token: otp,
+        associaton: email,
+      });
+
+      if (session?._id) {
+        console.log(session);
+      }
+
+      //send otp to user email
+    }
+
+    ResponseClient({ req, res, message: "OTP is sent to your email" });
   } catch (error) {
     next(error);
   }

@@ -49,3 +49,11 @@ Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21h
 ###Renew accessJWT
 GET {{rootURL}}/api/v1/auth/renew-access-JWT
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM3MDg1MjE0LCJleHAiOjE3Mzk2NzcyMTR9.p_a6dpdJtgtYfYSSAK3h6bSsUF776g9HkQr_MhKBDjI
+
+### OTP request
+POST {{rootURL}}/api/v1/auth/otp
+Content-Type: application/json
+
+{
+    "email":"a@gmail.com"
+}
