@@ -19,6 +19,27 @@ export const UserActivationUrlEmailTemplate = ({ email, name, url }) => {
     `,
   };
 };
+export const passwordResetOTPSendTemplate = ({ email, name, otp }) => {
+  console.log(email);
+  return {
+    from: `Local Library <${process.env.SMTP_EMAIL}>`,
+    to: email,
+    subject: "Your OTP to reset Password, Please do not share OTP with anyone.",
+    text: `Dear ${name} Here is your OTP to reset the password. OTP ${otp}.  This OTP will expire in 5 minutes`,
+    html: `
+    <br />
+<br />
+<p>Dear ${name} Here is your OTP to reset the password. OTP ${otp}.  This OTP will expire in 5 minutes</p>
+<br />
+<br />
+
+
+<br />
+<br />
+    
+    `,
+  };
+};
 export const UserAccountActivationNotificationTemplate = ({ email, name }) => {
   console.log(email);
   return {

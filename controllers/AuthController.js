@@ -10,6 +10,7 @@ import {
   updateUser,
 } from "../models/users/UserModal.js";
 import {
+  passwordResetOTPSendNotificationEmail,
   UserActivatedNotificationEmail,
   UserActivationUrlEmail,
 } from "../services/email/EmailServices.js";
@@ -164,15 +165,21 @@ export const generateOTP = async (req, res, next) => {
     if (user?._id) {
       //Generate OTP
       const otp = generateRandomOTP();
-      console.log(otp);
+
       // store in session table
       const session = await createNewSession({
         token: otp,
         associaton: email,
+        expire: new Date(Date.now() + 1000 * 60 * 5),
       });
 
       if (session?._id) {
-        console.log(session);
+        const info = await passwordResetOTPSendNotificationEmail({
+          email,
+          name: user.fName,
+          otp,
+        });
+        console.log(info);
       }
 
       //send otp to user email
