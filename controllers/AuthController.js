@@ -157,6 +157,7 @@ export const generateOTP = async (req, res, next) => {
     //get email from req.body
 
     const { email } = req.body;
+    console.log(req.body);
 
     //get user by email
 
