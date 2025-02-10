@@ -5,9 +5,11 @@ import {
   insertUser,
   loginUser,
   logoutUser,
+  resetNewPassword,
 } from "../controllers/AuthController.js";
 import {
   loginValidation,
+  newPasswordResetValidation,
   newUserValidation,
   userActivationValidation,
 } from "../middlewares/validation/AuthValidation.js";
@@ -25,3 +27,4 @@ AuthRoute.post("/login", loginValidation, loginUser);
 AuthRoute.get("/renew-access-JWT", renewaccessJWTMiddleware);
 AuthRoute.get("/logout", userAuthMiddleWare, logoutUser);
 AuthRoute.post("/otp", generateOTP);
+AuthRoute.post("/reset-password", newPasswordResetValidation, resetNewPassword);

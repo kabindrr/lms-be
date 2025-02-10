@@ -61,3 +61,24 @@ export const UserAccountActivationNotificationTemplate = ({ email, name }) => {
     `,
   };
 };
+export const userProfileUpdatedNotificationTemplate = ({ email, name }) => {
+  console.log(email);
+  return {
+    from: `Local Library <${process.env.SMTP_EMAIL}>`,
+    to: email,
+    subject: "Your account has been updated",
+    text: `Hello  ${name} Your account has been updated, If this wasn't you, Change your password and contact us immediately`,
+    html: `
+    <br />
+<br />
+<p> Your account has been updated, If this wasn't you, Change your password and contact us immediately</p>
+<br />
+<br />
+
+
+<br />
+<br />
+    
+    `,
+  };
+};

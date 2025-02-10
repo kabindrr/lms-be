@@ -3,6 +3,7 @@ import {
   createNewSession,
   deleteManySession,
   deleteSession,
+  getSession,
 } from "../models/session/SessionModal.js";
 import {
   addUser,
@@ -18,6 +19,8 @@ import { comparepassword, hashPassword } from "../utils/bcryptjs.js";
 import { v4 as uuidv4 } from "uuid";
 import { getJWTs } from "../utils/JWT.js";
 import { generateRandomOTP } from "../utils/randomGenerator.js";
+import { userProfileUpdatedNotificationTemplate } from "../services/email/EmailTemplate.js";
+
 export const insertUser = async (req, res, next) => {
   try {
     req.body.password = hashPassword(req.body.password);
@@ -187,6 +190,48 @@ export const generateOTP = async (req, res, next) => {
     }
 
     ResponseClient({ req, res, message: "OTP is sent to your email" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const resetNewPassword = async (req, res, next) => {
+  try {
+    const { email, password, otp } = req.body;
+
+    //check otp in session table
+    const session = await getSession({
+      token: otp,
+      associaton: email,
+    });
+
+    if (session?._id) {
+      //encrypt the password
+      const hashPass = hashPassword(password);
+
+      //update the user table
+
+      const user = await updateUser({ email }, { password: hashPass });
+
+      if (user?._id) {
+        //send email Notifaction
+
+        userProfileUpdatedNotificationTemplate({ email }, { name: user.fName });
+
+        return ResponseClient({
+          req,
+          res,
+          message:
+            "Your password has been updated successfully, you may login now",
+        });
+      }
+    }
+    ResponseClient({
+      req,
+      res,
+      statusCode: 400,
+      message: "Invalid data or token is expired",
+    });
   } catch (error) {
     next(error);
   }
