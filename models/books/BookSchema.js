@@ -25,6 +25,8 @@ const BookSchema = new mongoose.Schema(
     isbn: {
       type: String,
       required: true,
+      unique: true,
+      index: 1,
     },
     genre: {
       type: String,
@@ -36,6 +38,10 @@ const BookSchema = new mongoose.Schema(
     },
     averageRating: {
       type: Number,
+    },
+    description: {
+      type: String,
+      required: true,
     },
     addedBy: {
       name: {

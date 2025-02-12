@@ -80,16 +80,17 @@ GET {{rootURL}}/api/v1/books
 ### Add new book
 POST {{rootURL}}/api/v1/books
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM5MzMyNTM1LCJleHAiOjE3Mzk0MTg5MzV9.ILiU_HZqdy06aZ4oQoFQyxXKf5K2MARFq1AShoJs8LI
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM5MzQyNDI3LCJleHAiOjE3Mzk0Mjg4Mjd9.9ihoNoBtcse1J8LwqF0YtR6aboMzr8dKwlSRVZ3Y7wA
 
 {
         "title": "JavaScript: The Definitive Guide",
     "year": 2024,
     "author": "David Flanagan",
     "imgUrl": "https://images-na.ssl-images-amazon.com/images/I/41IeqdW9k8L._SX379_BO1,204,203,200_.jpg",
-    "isbn": "9781491952023",
-    "genre": "Programming"
-    
+    "isbn": "047195868X",
+    "genre": "Programming",
+    "description": "JavaScript is one of the most widely used programming languages in the world, and 'JavaScript: The Definitive Guide' has been a go-to resource for developers for decades. This latest 2024 edition continues to serve as an essential guide for beginners and experienced programmers alike, offering deep insights into modern JavaScript, including ES6+ features, asynchronous programming, and the latest trends in web development.\n\nThis book covers everything from the fundamentals of JavaScript syntax to advanced topics like closures, prototypes, and event-driven programming. It provides real-world examples, best practices, and performance optimization techniques that help developers write clean, efficient, and maintainable code. Whether you're working on front-end applications with frameworks like React and Vue.js or developing back-end services with Node.js, this book equips you with the knowledge needed to master JavaScript.\n\nIn addition to its extensive coverage of the language itself, 'JavaScript: The Definitive Guide' delves into browser APIs, debugging techniques, and security considerations. With its detailed explanations and hands-on examples, this book is a must-have for anyone serious about JavaScript development. Whether you’re a beginner looking to learn JavaScript from scratch or an experienced developer refining your skills, this comprehensive guide is the perfect resource."
+
 
 
 }
