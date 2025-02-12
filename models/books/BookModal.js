@@ -1,5 +1,5 @@
 import BookSchema from "./BookSchema.js";
 
-export const createNewBook = (bookObj) => {
+export const addNewBook = (bookObj) => {
   return BookSchema(bookObj).save();
 };
