@@ -1,6 +1,10 @@
 import { getSession } from "../models/session/SessionModal.js";
 import { getOneUser, getUserByEmail } from "../models/users/UserModal.js";
-import { Sign_Access_JWT, Verify_Access_JWT, Verify_Refresh_JWT } from "../utils/JWT.js";
+import {
+  Sign_Access_JWT,
+  Verify_Access_JWT,
+  Verify_Refresh_JWT,
+} from "../utils/JWT.js";
 import { ResponseClient } from "./ResponseClient.js";
 
 export const userAuthMiddleWare = async (req, res, next) => {
@@ -32,6 +36,22 @@ export const userAuthMiddleWare = async (req, res, next) => {
   }
 
   ResponseClient({ req, res, message, statusCode: 401 });
+};
+
+//check the user role admin
+export const adminAuthMiddleware = (req, res, next) => {
+  try {
+    req.userInfo.role === "admin"
+      ? next()
+      : ResponseClient({
+          req,
+          res,
+          message: "You need to have admin access to complete this task",
+          statusCode: 403,
+        });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const renewaccessJWTMiddleware = async (req, res, next) => {
