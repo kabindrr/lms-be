@@ -8,6 +8,7 @@ import { AuthRoute } from "./routers/AuthRoute.js";
 import { errorHandler } from "./middlewares/ErrorHandler.js";
 import { ResponseClient } from "./middlewares/ResponseClient.js";
 import UserRouter from "./routers/UsersRoute.js";
+import BookRouter from "./routers/BookRoute.js";
 dotenv.config();
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.json());
 //routes
 app.use("/api/v1/auth", AuthRoute);
 app.use("/api/v1/users", UserRouter);
+app.use("/api/v1/books", BookRouter);
 
 //server status
 app.get("/", (req, res) => {
