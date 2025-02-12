@@ -67,3 +67,37 @@ Content-Type: application/json
     "password":"aA2@aaaa",
     "otp":4403
 }
+
+
+
+//Book API
+
+### get books
+
+GET {{rootURL}}/api/v1/books
+
+
+### Add new book
+POST {{rootURL}}/api/v1/books
+Content-Type: application/json
+
+{
+        "title": "JavaScript: The Definitive Guide",
+    "year": 2024,
+    "author": "David Flanagan",
+    "imgURL": "https://images-na.ssl-images-amazon.com/images/I/41IeqdW9k8L._SX379_BO1,204,203,200_.jpg",
+    "isbn": "9781491952023",
+    "genre": "Programming",
+    "available": false,
+    "averageRating": 4.5,
+    "addedBy": {
+        "name": "Kabi",
+        "adminId": "65bdf12c9c12345678abcd90"
+    },
+    "lastUpdatedBy": {
+        "name": "Kabi",
+        "adminId": "65bdf12c9c12345678abcd90"
+    }
+
+
+}
