@@ -1,5 +1,9 @@
 import { ResponseClient } from "../middlewares/ResponseClient.js";
-import { addNewBook } from "../models/books/BookModal.js";
+import {
+  addNewBook,
+  getAllBooks,
+  getAllPublicBooks,
+} from "../models/books/BookModal.js";
 
 export const insertNewBook = async (req, res, next) => {
   try {
@@ -28,6 +32,33 @@ export const insertNewBook = async (req, res, next) => {
           res,
           message: "Unable to add new book now, Please try again later",
         });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAllPublicBooksController = async (req, res, next) => {
+  try {
+    const payload = await getAllPublicBooks();
+    return ResponseClient({
+      req,
+      res,
+      payload,
+      message: "The book had been added successfully ",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+export const getAllBooksController = async (req, res, next) => {
+  try {
+    const payload = await getAllBooks();
+    return ResponseClient({
+      req,
+      res,
+      payload,
+      message: "The book had been added successfully ",
+    });
   } catch (error) {
     next(error);
   }

@@ -1,5 +1,9 @@
 import express from "express";
-import { insertNewBook } from "../controllers/BookController.js";
+import {
+  getAllBooksController,
+  getAllPublicBooksController,
+  insertNewBook,
+} from "../controllers/BookController.js";
 import {
   adminAuthMiddleware,
   userAuthMiddleWare,
@@ -8,9 +12,16 @@ import { newBookDataValidation } from "../middlewares/validation/BookDataValidat
 
 const BookRouter = express.Router();
 
-BookRouter.get("/", (req, res, next) => {
-  res.json("todo");
-});
+//public api access
+BookRouter.get("/", getAllPublicBooksController);
+
+//admin only access
+BookRouter.get(
+  "/admin",
+  userAuthMiddleWare,
+  adminAuthMiddleware,
+  getAllBooksController
+);
 
 BookRouter.post(
   "/",

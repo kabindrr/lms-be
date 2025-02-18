@@ -72,9 +72,13 @@ Content-Type: application/json
 
 //Book API
 
-### get books
-
+### get books 
 GET {{rootURL}}/api/v1/books
+
+### get books admin
+
+GET {{rootURL}}/api/v1/books/admin
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM5OTE3MzE0LCJleHAiOjE3NDAwMDM3MTR9.3bl_x1-GMFUlypcufUkjh-PrxL8mgyVrug0D1JRdZx0
 
 
 ### Add new book
