@@ -1,3 +1,4 @@
+import slugify from "slugify";
 import { ResponseClient } from "../middlewares/ResponseClient.js";
 import {
   addNewBook,
@@ -11,6 +12,7 @@ export const insertNewBook = async (req, res, next) => {
     console.log(fName, email, _id);
     const obj = {
       ...req.body,
+      slug: slugify(req.body.title, { lower: true }),
       addedBy: {
         name: fName,
         adminId: _id,
@@ -33,6 +35,15 @@ export const insertNewBook = async (req, res, next) => {
           message: "Unable to add new book now, Please try again later",
         });
   } catch (error) {
+    if (error.message.includes("E11000 duplicate key")) {
+      return ResponseClient({
+        req,
+        res,
+        statusCode: 400,
+        message:
+          "Duplicate data not allowed: " + JSON.stringify(error.keyValue),
+      });
+    }
     next(error);
   }
 };
