@@ -4,6 +4,7 @@ import {
   addNewBook,
   getAllBooks,
   getAllPublicBooks,
+  updateBook,
 } from "../models/books/BookModal.js";
 
 export const insertNewBook = async (req, res, next) => {
@@ -70,6 +71,34 @@ export const getAllBooksController = async (req, res, next) => {
       payload,
       message: "The book had been added successfully ",
     });
+  } catch (error) {
+    next(error);
+  }
+};
+export const updateBookController = async (req, res, next) => {
+  try {
+    const { fName, _id } = req.userInfo;
+
+    const obj = {
+      ...req.body,
+
+      lastUpdatedBy: {
+        name: fName,
+        adminId: _id,
+      },
+    };
+    const book = await updateBook(obj);
+    book?._id
+      ? ResponseClient({
+          req,
+          res,
+          message: "Book Updated successfully",
+        })
+      : ResponseClient({
+          req,
+          res,
+          message: "Unable to update  book now, Please try again later",
+        });
   } catch (error) {
     next(error);
   }
