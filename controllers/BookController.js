@@ -78,6 +78,7 @@ export const getAllBooksController = async (req, res, next) => {
 export const updateBookController = async (req, res, next) => {
   try {
     const { fName, _id } = req.userInfo;
+    console.log(req.body);
 
     const obj = {
       ...req.body,
