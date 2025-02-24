@@ -1,5 +1,12 @@
+import slugify from "slugify";
 import { ResponseClient } from "../middlewares/ResponseClient.js";
-import { addNewBook } from "../models/books/BookModal.js";
+import {
+  addNewBook,
+  deleteBook,
+  getAllBooks,
+  getAllPublicBooks,
+  updateBook,
+} from "../models/books/BookModal.js";
 
 export const insertNewBook = async (req, res, next) => {
   try {
@@ -7,6 +14,7 @@ export const insertNewBook = async (req, res, next) => {
     console.log(fName, email, _id);
     const obj = {
       ...req.body,
+      slug: slugify(req.body.title, { lower: true }),
       addedBy: {
         name: fName,
         adminId: _id,
@@ -27,6 +35,91 @@ export const insertNewBook = async (req, res, next) => {
           req,
           res,
           message: "Unable to add new book now, Please try again later",
+        });
+  } catch (error) {
+    if (error.message.includes("E11000 duplicate key")) {
+      return ResponseClient({
+        req,
+        res,
+        statusCode: 400,
+        message:
+          "Duplicate data not allowed: " + JSON.stringify(error.keyValue),
+      });
+    }
+    next(error);
+  }
+};
+
+export const getAllPublicBooksController = async (req, res, next) => {
+  try {
+    const payload = await getAllPublicBooks();
+    return ResponseClient({
+      req,
+      res,
+      payload,
+      message: "The book had been added successfully ",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+export const getAllBooksController = async (req, res, next) => {
+  try {
+    const payload = await getAllBooks();
+    return ResponseClient({
+      req,
+      res,
+      payload,
+      message: "The book had been added successfully ",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+export const updateBookController = async (req, res, next) => {
+  try {
+    const { fName, _id } = req.userInfo;
+    console.log(req.body);
+
+    const obj = {
+      ...req.body,
+
+      lastUpdatedBy: {
+        name: fName,
+        adminId: _id,
+      },
+    };
+    const book = await updateBook(obj);
+    book?._id
+      ? ResponseClient({
+          req,
+          res,
+          message: "Book Updated successfully",
+        })
+      : ResponseClient({
+          req,
+          res,
+          message: "Unable to update  book now, Please try again later",
+        });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteBookController = async (req, res, next) => {
+  try {
+    const { _id } = req.params;
+    const book = await deleteBook(_id);
+    book?._id
+      ? ResponseClient({
+          req,
+          res,
+          message: "Book deleted successfully",
+        })
+      : ResponseClient({
+          req,
+          res,
+          message: "Unable to delete the book now, Please try again later",
         });
   } catch (error) {
     next(error);

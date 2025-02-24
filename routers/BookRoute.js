@@ -1,16 +1,32 @@
 import express from "express";
-import { insertNewBook } from "../controllers/BookController.js";
+import {
+  deleteBookController,
+  getAllBooksController,
+  getAllPublicBooksController,
+  insertNewBook,
+  updateBookController,
+} from "../controllers/BookController.js";
 import {
   adminAuthMiddleware,
   userAuthMiddleWare,
 } from "../middlewares/AuthMiddleWare.js";
-import { newBookDataValidation } from "../middlewares/validation/BookDataValidation.js";
+import {
+  newBookDataValidation,
+  updateBookDataValidation,
+} from "../middlewares/validation/BookDataValidation.js";
 
 const BookRouter = express.Router();
 
-BookRouter.get("/", (req, res, next) => {
-  res.json("todo");
-});
+//public api access
+BookRouter.get("/", getAllPublicBooksController);
+
+//admin only access
+BookRouter.get(
+  "/admin",
+  userAuthMiddleWare,
+  adminAuthMiddleware,
+  getAllBooksController
+);
 
 BookRouter.post(
   "/",
@@ -18,6 +34,24 @@ BookRouter.post(
   adminAuthMiddleware,
   newBookDataValidation,
   insertNewBook
+);
+
+// update book
+BookRouter.put(
+  "/",
+  userAuthMiddleWare,
+  adminAuthMiddleware,
+  updateBookDataValidation,
+  updateBookController
+);
+
+//delete Book
+BookRouter.delete(
+  "/:_id",
+  userAuthMiddleWare,
+  adminAuthMiddleware,
+
+  deleteBookController
 );
 
 export default BookRouter;

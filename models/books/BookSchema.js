@@ -6,8 +6,15 @@ const BookSchema = new mongoose.Schema(
       type: String,
       default: "inactive",
     },
+    slug: {
+      type: String,
+      unique: true,
+      index: 1,
+      required: true,
+    },
     title: {
       type: String,
+
       required: true,
     },
     year: {
@@ -42,6 +49,10 @@ const BookSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
+    },
+    expectedAvailable: {
+      type: Date,
+      default: null,
     },
     addedBy: {
       name: {

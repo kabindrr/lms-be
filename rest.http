@@ -72,9 +72,13 @@ Content-Type: application/json
 
 //Book API
 
-### get books
-
+### get books 
 GET {{rootURL}}/api/v1/books
+
+### get books admin
+
+GET {{rootURL}}/api/v1/books/admin
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM5OTE3MzE0LCJleHAiOjE3NDAwMDM3MTR9.3bl_x1-GMFUlypcufUkjh-PrxL8mgyVrug0D1JRdZx0
 
 
 ### Add new book
@@ -89,6 +93,27 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21ha
     "imgUrl": "https://images-na.ssl-images-amazon.com/images/I/41IeqdW9k8L._SX379_BO1,204,203,200_.jpg",
     "isbn": "047195868X",
     "genre": "Programming",
+    "description": "JavaScript is one of the most widely used programming languages in the world, and 'JavaScript: The Definitive Guide' has been a go-to resource for developers for decades. This latest 2024 edition continues to serve as an essential guide for beginners and experienced programmers alike, offering deep insights into modern JavaScript, including ES6+ features, asynchronous programming, and the latest trends in web development.\n\nThis book covers everything from the fundamentals of JavaScript syntax to advanced topics like closures, prototypes, and event-driven programming. It provides real-world examples, best practices, and performance optimization techniques that help developers write clean, efficient, and maintainable code. Whether you're working on front-end applications with frameworks like React and Vue.js or developing back-end services with Node.js, this book equips you with the knowledge needed to master JavaScript.\n\nIn addition to its extensive coverage of the language itself, 'JavaScript: The Definitive Guide' delves into browser APIs, debugging techniques, and security considerations. With its detailed explanations and hands-on examples, this book is a must-have for anyone serious about JavaScript development. Whether you’re a beginner looking to learn JavaScript from scratch or an experienced developer refining your skills, this comprehensive guide is the perfect resource."
+
+
+
+}
+
+###Update Book
+PUT {{rootURL}}/api/v1/books
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzQwMDE0OTY0LCJleHAiOjE3NDAxMDEzNjR9.N1TS_WqJ5FqyVfGGo2tOgNwl2B52jwx5dNw9nksBch4
+
+{   
+    "_id":"67b65b6f8fde46ae4303ec11",
+    "status":"active",
+    "title": "Artificial Intelligence Methods for Software Engineering",
+    "year": 2024,
+    "author": "David Flanagan",
+    "imgUrl": "https://images-na.ssl-images-amazon.com/images/I/41IeqdW9k8L._SX379_BO1,204,203,200_.jpg",
+    "isbn": "9876543210",
+    "genre": "Programming",
+    "expectedAvailable":"",
     "description": "JavaScript is one of the most widely used programming languages in the world, and 'JavaScript: The Definitive Guide' has been a go-to resource for developers for decades. This latest 2024 edition continues to serve as an essential guide for beginners and experienced programmers alike, offering deep insights into modern JavaScript, including ES6+ features, asynchronous programming, and the latest trends in web development.\n\nThis book covers everything from the fundamentals of JavaScript syntax to advanced topics like closures, prototypes, and event-driven programming. It provides real-world examples, best practices, and performance optimization techniques that help developers write clean, efficient, and maintainable code. Whether you're working on front-end applications with frameworks like React and Vue.js or developing back-end services with Node.js, this book equips you with the knowledge needed to master JavaScript.\n\nIn addition to its extensive coverage of the language itself, 'JavaScript: The Definitive Guide' delves into browser APIs, debugging techniques, and security considerations. With its detailed explanations and hands-on examples, this book is a must-have for anyone serious about JavaScript development. Whether you’re a beginner looking to learn JavaScript from scratch or an experienced developer refining your skills, this comprehensive guide is the perfect resource."
 
 
