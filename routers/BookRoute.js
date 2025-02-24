@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteBookController,
   getAllBooksController,
   getAllPublicBooksController,
   insertNewBook,
@@ -42,6 +43,15 @@ BookRouter.put(
   adminAuthMiddleware,
   updateBookDataValidation,
   updateBookController
+);
+
+//delete Book
+BookRouter.delete(
+  "/:_id",
+  userAuthMiddleWare,
+  adminAuthMiddleware,
+
+  deleteBookController
 );
 
 export default BookRouter;

@@ -2,6 +2,7 @@ import slugify from "slugify";
 import { ResponseClient } from "../middlewares/ResponseClient.js";
 import {
   addNewBook,
+  deleteBook,
   getAllBooks,
   getAllPublicBooks,
   updateBook,
@@ -99,6 +100,26 @@ export const updateBookController = async (req, res, next) => {
           req,
           res,
           message: "Unable to update  book now, Please try again later",
+        });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteBookController = async (req, res, next) => {
+  try {
+    const { _id } = req.params;
+    const book = await deleteBook(_id);
+    book?._id
+      ? ResponseClient({
+          req,
+          res,
+          message: "Book deleted successfully",
+        })
+      : ResponseClient({
+          req,
+          res,
+          message: "Unable to delete the book now, Please try again later",
         });
   } catch (error) {
     next(error);
