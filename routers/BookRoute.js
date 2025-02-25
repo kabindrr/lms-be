@@ -15,7 +15,11 @@ import {
   updateBookDataValidation,
 } from "../middlewares/validation/BookDataValidation.js";
 
+import { upload } from "../utils/multer.js";
+
 const BookRouter = express.Router();
+
+
 
 //public api access
 BookRouter.get("/", getAllPublicBooksController);
@@ -32,6 +36,8 @@ BookRouter.post(
   "/",
   userAuthMiddleWare,
   adminAuthMiddleware,
+  // upload.single("image"),
+  upload.array("image", 2),
   newBookDataValidation,
   insertNewBook
 );
