@@ -9,9 +9,12 @@ import {
 } from "../models/books/BookModal.js";
 
 export const insertNewBook = async (req, res, next) => {
+  console.log(300, req.files);
   try {
     const { fName, email, _id } = req.userInfo;
-    console.log(fName, email, _id);
+    const { path } = req.file;
+
+    console.log(fName, email, _id, path);
     const obj = {
       ...req.body,
       slug: slugify(req.body.title, { lower: true }),
@@ -23,6 +26,7 @@ export const insertNewBook = async (req, res, next) => {
         name: fName,
         adminId: _id,
       },
+      imgUrl: path,
     };
     const book = await addNewBook(obj);
     book?._id
