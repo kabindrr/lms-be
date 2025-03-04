@@ -34,8 +34,8 @@ BookRouter.post(
   "/",
   userAuthMiddleWare,
   adminAuthMiddleware,
-  // upload.single("image"),
   upload.single("image"),
+  // upload.array("image", 2),
   newBookDataValidation,
   insertNewBook
 );
