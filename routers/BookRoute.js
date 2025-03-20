@@ -45,6 +45,7 @@ BookRouter.put(
   "/",
   userAuthMiddleWare,
   adminAuthMiddleware,
+  upload.array("images", 2),
   updateBookDataValidation,
   updateBookController
 );

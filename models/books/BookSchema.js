@@ -29,6 +29,12 @@ const BookSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    imageList: [
+      {
+        type: String,
+        default: [],
+      },
+    ],
     isbn: {
       type: String,
       required: true,

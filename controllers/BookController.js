@@ -83,7 +83,14 @@ export const getAllBooksController = async (req, res, next) => {
 export const updateBookController = async (req, res, next) => {
   try {
     const { fName, _id } = req.userInfo;
-    console.log(req.body);
+    console.log(req.files);
+
+    if (Array.isArray(req.files)) {
+      req.body.imageList = [
+        ...req.body.imageList.split(","),
+        ...req.files.map((obj) => obj.path),
+      ];
+    }
 
     const obj = {
       ...req.body,
