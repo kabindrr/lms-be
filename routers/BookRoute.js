@@ -19,8 +19,6 @@ import { upload } from "../utils/multer.js";
 
 const BookRouter = express.Router();
 
-
-
 //public api access
 BookRouter.get("/", getAllPublicBooksController);
 
@@ -36,8 +34,8 @@ BookRouter.post(
   "/",
   userAuthMiddleWare,
   adminAuthMiddleware,
-  // upload.single("image"),
-  upload.array("image", 2),
+  upload.single("image"),
+  // upload.array("image", 2),
   newBookDataValidation,
   insertNewBook
 );
@@ -47,6 +45,7 @@ BookRouter.put(
   "/",
   userAuthMiddleWare,
   adminAuthMiddleware,
+  upload.array("images", 2),
   updateBookDataValidation,
   updateBookController
 );

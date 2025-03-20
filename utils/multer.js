@@ -4,7 +4,7 @@ import fs from "fs";
 
 const __dirname = path.resolve();
 
-const filePathDestination = path.join(__dirname, "public/images");
+const filePathDestination = "public/images";
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     //check if directory exist or not if no then create new folder
