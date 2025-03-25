@@ -7,6 +7,7 @@ import {
   LONG_STR_REQ,
   SHORT_STR_REQ,
   STATUS_REQ,
+  STR_ARRAY,
   YEAR_REQ,
 } from "./JoiConst.js";
 import { validateData } from "./JoiValidation.js";
@@ -37,6 +38,7 @@ export const updateBookDataValidation = (req, res, next) => {
     status: STATUS_REQ,
     _id: _ID_REQ,
     imageList: LONG_STR_REQ.allow(""),
+    imageToDelete: STR_ARRAY,
   };
   validateData({ req, res, next, obj });
 };

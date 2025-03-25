@@ -7,6 +7,7 @@ import {
   getAllPublicBooks,
   updateBook,
 } from "../models/books/BookModal.js";
+import { deleteFiles } from "../utils/fileUtils.js";
 
 export const insertNewBook = async (req, res, next) => {
   console.log(300, req.files);
@@ -84,10 +85,19 @@ export const updateBookController = async (req, res, next) => {
   try {
     const { fName, _id } = req.userInfo;
     console.log(req.files);
+    req.body.imageList = req.body.imageList.split(",");
+    //remove imageToDelete list from imageList
+    if (req.body.imageToDelete.length) {
+      req.body.imageList = req.body.imageList.filter(
+        (img) => !req.body.imageToDelete.includes(img)
+      );
+
+      req.body.imageToDelete.map((img) => deleteFiles(img));
+    }
 
     if (Array.isArray(req.files)) {
       req.body.imageList = [
-        ...req.body.imageList.split(","),
+        ...req.body.imageList,
         ...req.files.map((obj) => obj.path),
       ];
     }

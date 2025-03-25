@@ -25,6 +25,9 @@ export const SHORT_STR_REQ = SHORT_STR.required();
 
 export const LONG_STR = Joi.string().min(10).max(5000);
 export const LONG_STR_REQ = LONG_STR.required();
+
+export const STR_ARRAY = Joi.array().items(Joi.string());
+export const STR_ARRAY_REQ = Joi.array().items(Joi.string()).required();
 export const YEAR = Joi.number()
   .integer()
   .min(1901)
@@ -39,5 +42,5 @@ export const _ID = Joi.string();
 export const _ID_REQ = _ID.required();
 export const STATUS = Joi.string().valid("active", "inactive");
 export const STATUS_REQ = STATUS.required();
-export const EXPECTED_DATE = Joi.date().allow(null,"")
+export const EXPECTED_DATE = Joi.date().allow(null, "");
 export const EXPECTED_DATE_REQ = EXPECTED_DATE.required();
