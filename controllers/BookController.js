@@ -87,7 +87,7 @@ export const updateBookController = async (req, res, next) => {
     console.log(req.files);
     req.body.imageList = req.body.imageList.split(",");
     //remove imageToDelete list from imageList
-    if (req.body.imageToDelete.length) {
+    if (req.body.imageToDelete && req.body.imageToDelete.length) {
       req.body.imageList = req.body.imageList.filter(
         (img) => !req.body.imageToDelete.includes(img)
       );
@@ -95,10 +95,10 @@ export const updateBookController = async (req, res, next) => {
       req.body.imageToDelete.map((img) => deleteFiles(img));
     }
 
-    if (Array.isArray(req.files)) {
+    if (req.files && Array.isArray(req.files)) {
       req.body.imageList = [
         ...req.body.imageList,
-        ...req.files.map((obj) => obj.path),
+        ...req.files.map((file) => file.path),
       ];
     }
 
@@ -131,6 +131,9 @@ export const deleteBookController = async (req, res, next) => {
   try {
     const { _id } = req.params;
     const book = await deleteBook(_id);
+    book.imageList.map((img) => deleteFiles(img));
+
+    console.log(book);
     book?._id
       ? ResponseClient({
           req,
