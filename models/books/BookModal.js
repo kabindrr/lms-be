@@ -12,10 +12,19 @@ export const getAllBooks = () => {
 };
 //Update book
 export const updateBook = ({ _id, ...rest }) => {
-  return BookSchema.findByIdAndUpdate(_id, rest);
+  return BookSchema.findByIdAndUpdate(_id, rest, {
+    new: true,
+    runValidators: true,
+    strict: false,
+  });
 };
 
 //delete book
 export const deleteBook = (_id) => {
   return BookSchema.findByIdAndDelete(_id);
+};
+
+//import many books
+export const createManyBooks = (booksArg) => {
+  return BookSchema.insertMany(booksArg);
 };
