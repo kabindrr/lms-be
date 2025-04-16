@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon --env-file=.env server.js"
+    "dev": "nodemon --env-file=.env server.js",
+    "import-book": " nodemon --env-file=.env seeds/BookSeeds/importData.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
