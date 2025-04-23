@@ -72,6 +72,10 @@ Content-Type: application/json
 
 //Book API
 
+
+### get single book
+GET {{rootURL}}/api/v1/books/public/hands-on-machine-learning
+
 ### get books 
 GET {{rootURL}}/api/v1/books
 
@@ -84,7 +88,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21ha
 ### Add new book
 POST {{rootURL}}/api/v1/books
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzM5MzQyNDI3LCJleHAiOjE3Mzk0Mjg4Mjd9.9ihoNoBtcse1J8LwqF0YtR6aboMzr8dKwlSRVZ3Y7wA
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwiaWF0IjoxNzQ1Mzc4NjQ3LCJleHAiOjE3NDU0NjUwNDd9.GMNlCwjc2CrRnXq26fEvMznUIIKu73cqvBuddevKtv8
 
 {
         "title": "JavaScript: The Definitive Guide",
