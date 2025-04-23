@@ -3,6 +3,7 @@ import { ResponseClient } from "../middlewares/ResponseClient.js";
 import {
   addNewBook,
   deleteBook,
+  findABook,
   getAllBooks,
   getAllPublicBooks,
   updateBook,
@@ -63,6 +64,20 @@ export const getAllPublicBooksController = async (req, res, next) => {
       res,
       payload,
       message: "The book had been added successfully ",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+export const getSingleBookController = async (req, res, next) => {
+  try {
+    const { slug } = req.params;
+    const payload = await findABook({ slug, status: "active" });
+    return ResponseClient({
+      req,
+      res,
+      payload,
+      message: "Book Found successfully ",
     });
   } catch (error) {
     next(error);

@@ -28,3 +28,8 @@ export const deleteBook = (_id) => {
 export const createManyBooks = (booksArg) => {
   return BookSchema.insertMany(booksArg);
 };
+
+//get a single book, filter = {slug,status:"active"}
+export const findABook = (filter) => {
+  return BookSchema.findOne(filter);
+};
